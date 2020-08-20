@@ -1,0 +1,34 @@
+#!/bin/bash
+#Execute within directory containing SAC files and associated SACPZ files.
+#This removes the instrument response from the seismograms and outputs
+#SAC files with a .filtered extension.
+#Samuel Haugland 1/11/16
+
+mv */* . 
+rmdir * &> /dev/null
+
+for sacfile in $(ls *SAC)
+do
+    IFS='.' read -a a <<< "$sacfile"
+
+    loc=${a[2]}
+    if test -z $loc; then loc="--"; fi
+
+    pzfile=SACPZ.${a[0]}.${a[1]}.${loc}.${a[3]}
+    sac << EOF
+       setbb pzfile $pzfile
+       read $sacfile
+       rtr
+       taper
+       trans from polezero S %pzfile to none freq 0.0050 0.010 20 40
+       mul 1.0e9
+       write $sacfile.filtered
+       quit
+EOF
+#rm $sacfile
+#rm $pzfile
+done
+
+mkdir data
+mv * data
+

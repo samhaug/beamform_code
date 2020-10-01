@@ -44,7 +44,7 @@ t_max=$((${PP_time%.*}-10-400))
 
 # These levels should be appropriate for normalized beamforms.
 max_lvl=0.30
-w_lvl=0.10
+w_lvl=0.15
 
 #echo "xh_beammax $1 $w_lvl $max_lvl $t_min $t_max 5 30 > beammax"
 

@@ -1,5 +1,5 @@
 #!/bin/bash
-#SBATCH --job-name=movie_maker
+#SBATCH --job-name=scatloc
 #SBATCH --account=jritsema1
 #SBATCH --export=ALL 
 #SBATCH --nodes=5

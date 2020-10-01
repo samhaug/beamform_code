@@ -6,6 +6,6 @@ wait
 wait
 ~/src/beamform_code/find_beammax_filter.sh
 wait
-~/src/beamform_code/remove_maxima_along_baz_filter.sh 10 80
+~/src/beamform_code/remove_maxima_along_baz_filter.sh 10 60
 wait
-~/src/beamform_code/measure_scatter_energy_filter.sh
+#~/src/beamform_code/measure_scatter_energy_filter.sh

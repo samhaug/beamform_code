@@ -150,7 +150,7 @@ z.sort(['network','station','location'])
 n.sort(['network','station','location'])
 e.sort(['network','station','location'])
 
-print("Aligning on P")
+#print("Aligning on P")
 #for idx,tr in enumerate(z):
 #    gcarc = tr.stats.sac['gcarc']
 #    if tr.stats.sac['evdp'] > 1000:
@@ -170,6 +170,7 @@ print("Aligning on P")
 #z.differentiate()
 #n.differentiate()
 #e.differentiate()
+
 for tr in z:
     tr.write('z_comp/{}_{}_{}.sac'.format(tr.stats.network,tr.stats.station,tr.stats.location),format='SAC')
 for tr in n:

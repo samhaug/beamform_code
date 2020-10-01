@@ -32,6 +32,7 @@ if (( $(($dmax+ibaz)) > 365 )); then
    overflowf4=$((25+ibaz-365))
 fi
 
+if (( $(($dmax+ibaz)) < 365 )); then
 for d in f{1,2,3}*beammax; do 
     touch ${d}_clean
     while read baz inc time amp; do
@@ -44,12 +45,17 @@ for d in f{1,2,3}*beammax; do
         fi
     done < $d
 done
+fi
 
 if (( $(($dmax+ibaz)) > 365 )); then
    for d in f{1,2,3}*beammax; do 
        touch ${d}_clean
        while read baz inc time amp; do
-           if (( $baz > $overflow )); then 
+           if (( ( $baz > $(($ibaz-$dmax)) ) && ($baz < $(($ibaz-$dmin)) ) )); then 
+             echo $baz $inc $time $amp >> ${d}_clean
+           elif (( $baz < $overflow )); then 
+              echo $baz $inc $time $amp >> ${d}_clean
+           elif (( $baz > $ibaz+$dmin )); then 
               echo $baz $inc $time $amp >> ${d}_clean
            else
               continue

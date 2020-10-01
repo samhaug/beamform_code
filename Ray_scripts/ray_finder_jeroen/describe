@@ -1,0 +1,18 @@
+delta: 0.167
+ndata: 3882
+array_centroid_lat: 63.706
+array_centroid_lon: -149.266
+event_lat: 4.232
+event_lon: 124.520
+event_depth: 326.000
+baz_min: 0
+baz_max: 359
+baz_inc: 1
+i_min: 0
+i_max: 40
+i_inc: 1
+baz_lim: 359
+i_lim: 40
+dat1 min/max:  -0.7709   0.4007
+dat2 min/max:   0.0000   0.7018
+dat3 min/max:   0.0000   0.9648

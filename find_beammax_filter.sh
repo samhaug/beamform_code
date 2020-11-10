@@ -3,13 +3,14 @@
 if [ $# != 0 ]; then
    echo "Finds local maxima in beamform object. Automatically determines waterlevel"
    echo "and temporal boundaries. Does this for each normalized filtered beam file"
-   echo "USAGE: ./find_beammax.sh "
+   echo "USAGE: ./find_beammax_filter.sh "
    exit
 fi
 
 if [ ! -e f1_norm.beam ]; then
    echo "Cannot find f1_norm.beam. Execute this script in the same directory"
    echo 'as f{1,2,3,4}_norm.beam'
+   echo 'run normalize_beam_on_P_filter.sh first'
    exit
 fi
 
@@ -29,8 +30,8 @@ sP_time=$(taup_time -mod prem -h $evdp -deg $gcarc -ph sP --time | awk '{print $
 PP_time=$(taup_time -mod prem -h $evdp -deg $gcarc -ph PP --time | awk '{print $1}') 
 P_time=$(taup_time -mod prem -h $evdp -deg $gcarc -ph P --time | awk '{print $1}') 
 #Use these for deeper events ~150km
-#t_min=$((${sP_time%.*}+50))
-#t_max=$((${PP_time%.*}-20))
+#t_min=$((${sP_time%.*}+50-400))
+#t_max=$((${PP_time%.*}-20-400))
 
 #Use these for shallow events h < 20km
 t_min=$((${P_time%.*}+20-400))
@@ -44,7 +45,7 @@ t_max=$((${PP_time%.*}-10-400))
 
 # These levels should be appropriate for normalized beamforms.
 max_lvl=0.30
-w_lvl=0.15
+w_lvl=0.05
 
 #echo "xh_beammax $1 $w_lvl $max_lvl $t_min $t_max 5 30 > beammax"
 

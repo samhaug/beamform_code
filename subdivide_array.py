@@ -1,8 +1,10 @@
 from sys import argv,exit
-if len(argv) != 3:
-   print("Usage: python subdivide_array info_file n_clusers")
+if len(argv) != 5:
+   print("Usage: python subdivide_array info_file n_clusers stat_min rad_bin")
    print("   Where info_file iis 4 column ascii file of format stla stlo stnm netwk")
    print("   n_clusters: number of subarrays")
+   print("   stat_min: minimum number of stations per subarray")
+   print("   rad_bin: radius of subarray bin (degrees)")
    exit()
 
 from sklearn.cluster import KMeans
@@ -23,15 +25,15 @@ for idx,ii in enumerate(centers):
    count=0
    for jdx,jj in enumerate(coords):
       dist = gps2dist_azimuth(ii[0],ii[1],jj[0],jj[1])[0]/111195.
-      if dist < 2.5:
+      if dist < float(argv[4]):
          count += 1
 
-   if count > 20:
+   if count > int(argv[3]): 
       subcount += 1
       f = open("subarray_{}.txt".format(str(subcount)),"w")
       for jdx,jj in enumerate(coords):
          dist = gps2dist_azimuth(ii[0],ii[1],jj[0],jj[1])[0]/111195.
-         if dist < 2.5:
+         if dist < float(argv[4]):
             f.write("%8.4f %8.4f %4s %4s\n"%(jj[0],jj[1],names[jdx].split()[2],names[jdx].split()[3]))
           
       f.close()

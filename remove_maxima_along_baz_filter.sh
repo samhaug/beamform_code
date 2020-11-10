@@ -9,6 +9,11 @@ if [ $# != 2 ]; then
    exit
 fi
 
+if [ ! -e f1_beammax ]; then
+   echo "Can't find f1_beammax. Be in a SUBARRAY directory and "
+   echo "run find_beammax_filter.sh first"
+   exit
+fi
 
 rm *beammax_clean > /dev/null
 

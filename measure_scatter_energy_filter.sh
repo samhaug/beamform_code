@@ -13,8 +13,8 @@ if [ ! -e f1_norm.beam ]; then
    exit
 fi
 
-if [ ! -e f1_beammax_clean ]; then
-   echo " Cannot find f1_beammax_clean. Make sure all of the frequecy band files exist"
+if [ ! -e f1_beammax_P_ray ]; then
+   echo " Cannot find f1_beammax_P_ray. Make sure all of the frequecy band files exist"
    exit
 fi
 
@@ -37,52 +37,19 @@ if [ ! -d scatter_energy ]; then
 fi
 
 
-echo "Finding f1 scattered energy"
-i=1
-while read baz inc time amp; do
-    #Account for traces starting at 400 seconds after earthquake
-    t_min=$((${time%.*}-5-400))
-    t_max=$((${time%.*}+5-400))
-    i_min=$((${inc%.*}-1))
-    i_max=$((${inc%.*}+1))
-    echo $baz $inc $time > scatter_energy/energy_${i}_f1.dat
-    xh_beamenergy f1_norm.beam $t_min $t_max $i_min $i_max >> scatter_energy/energy_${i}_f1.dat
-    i=$((i+1))
-done < f1_beammax_clean
-
-echo "Finding f2 scattered energy"
-i=1
-while read baz inc time amp; do
-    t_min=$((${time%.*}-5-400))
-    t_max=$((${time%.*}+5-400))
-    i_min=$((${inc%.*}-1))
-    i_max=$((${inc%.*}+1))
-    echo $baz $inc $time > scatter_energy/energy_${i}_f2.dat
-    xh_beamenergy f2_norm.beam $t_min $t_max $i_min $i_max >> scatter_energy/energy_${i}_f2.dat
-    i=$((i+1))
-done < f2_beammax_clean
-
-echo "Finding f3 scattered energy"
-i=1
-while read baz inc time amp; do
-    t_min=$((${time%.*}-5-400))
-    t_max=$((${time%.*}+5-400))
-    i_min=$((${inc%.*}-1))
-    i_max=$((${inc%.*}+1))
-    echo $baz $inc $time > scatter_energy/energy_${i}_f3.dat
-    xh_beamenergy f3_norm.beam $t_min $t_max $i_min $i_max >> scatter_energy/energy_${i}_f3.dat
-    i=$((i+1))
-done < f3_beammax_clean
-
-echo "Finding f4 scattered energy"
-i=1
-while read baz inc time amp; do
-    t_min=$((${time%.*}-5-400))
-    t_max=$((${time%.*}+5-400))
-    i_min=$((${inc%.*}-1))
-    i_max=$((${inc%.*}+1))
-    echo $baz $inc $time > scatter_energy/energy_${i}_f4.dat
-    xh_beamenergy f4_norm.beam $t_min $t_max $i_min $i_max >> scatter_energy/energy_${i}_f4.dat
-    i=$((i+1))
-done < f4_beammax_clean
+freq=(f1 f2 f3 f4)
+for f in ${freq[@]}; do  
+   echo "Finding $f scattered energy"
+   i=1
+   while read baz inc time amp; do
+       #Account for traces starting at 400 seconds after earthquake
+       t_min=$((${time%.*}-5-400))
+       t_max=$((${time%.*}+5-400))
+       i_min=$((${inc%.*}-1))
+       i_max=$((${inc%.*}+1))
+       echo $baz $inc $time > scatter_energy/energy_${i}_${f}.dat
+       xh_beamenergy ${f}_norm.beam $t_min $t_max $i_min $i_max >> scatter_energy/energy_${i}_${f}.dat
+       i=$((i+1))
+   done < ${f}_beammax_P_ray
+done
 

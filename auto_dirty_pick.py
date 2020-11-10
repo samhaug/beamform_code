@@ -1,9 +1,17 @@
+from sys import argv,exit
+
+print(len(argv))
+if len(argv) != 2:
+   print("usage: python auto_dirty_pick.py SNR")
+   print("SNR: Signal/Noise ratio below which a trace is rejected")
+   exit()
+
 import obspy
 import numpy as np
 from matplotlib import pyplot as plt
-from sys import argv 
 from obspy.taup import TauPyModel
 model = TauPyModel(model='prem')
+
 
 st = obspy.read("data/*BHZ*")
 st.interpolate(2)
@@ -32,9 +40,13 @@ for tr in st:
 
     p_energy = np.sum(p_wave**2)/len(p_wave)
     noise_energy = np.sum(noise**2)/len(noise)
+
+    if np.isnan(np.sum(tr.data)):
+        dirty_list.append(name)
+
     try: 
         #if noise_energy > p_energy*0.8 or np.max(np.abs(noise)) > np.max(np.abs(p_wave)*0.3):
-        if np.max(np.abs(noise)) > np.max(np.abs(p_wave)*0.3):
+        if np.max(np.abs(noise)) > np.max(np.abs(p_wave)*(1/float(argv[1]))):
             dirty_list.append(name)
             ax[0].plot(tr.times(),tr.data+gcarc,lw=0.5,alpha=0.5,color='r')
             ax[0].scatter(time-400,gcarc,color='k',marker='x')

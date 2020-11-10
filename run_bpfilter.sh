@@ -2,6 +2,7 @@
 
 if [ ! -e SUBARRAY_1 ]; then
     echo "Needs at least one SUBARRAY_* directory"
+    echo "run organize_subarrays.sh in this directory first"
     exit
 fi
 

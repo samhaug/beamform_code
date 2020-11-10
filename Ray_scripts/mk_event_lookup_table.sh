@@ -3,16 +3,25 @@ SRC=/home/samhaug/src/beamform_code/Ray_scripts
 
 dg=0.5
 
-if [ ! -e describe ]; then
-   echo "can't find describe"
+#Make lookup table for outgoing rays for a given earthquake. 
+#Need to be in the Event_* directory. Looks for a describe file
+#within SUBARRAY_1
+
+if [ ! -e SUBARRAY_1/describe ]; then
+   echo "Can't find SUBARRAY_1/describe"
    exit
 fi
 
-if [ -e source_ray.dat ]; then
-   rm source_ray.dat
+if [ -e source_ray_P.dat ]; then
+   rm source_ray_P.dat
 fi
+
+if [ -e source_ray_S.dat ]; then
+   rm source_ray_S.dat
+fi
+
 #-- source depth
-h=$(grep depth describe | cut -d" " -f 2)
+h=$(grep depth SUBARRAY_1/describe | cut -d" " -f 2)
 
 for deg in $(seq 30 0.5 98); do
    echo Degree: $deg

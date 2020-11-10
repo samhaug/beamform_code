@@ -35,8 +35,11 @@ b_max=$((${baz%.*}+4))
 
 #echo "xh_beamnorm $1 $2 $t_min $t_max $i_min $i_max $b_min $b_max"
 
-xh_beamnorm subarray_*_f1.beam f1_norm.beam $t_min $t_max $i_min $i_max $b_min $b_max
-xh_beamnorm subarray_*_f2.beam f2_norm.beam $t_min $t_max $i_min $i_max $b_min $b_max
-xh_beamnorm subarray_*_f3.beam f3_norm.beam $t_min $t_max $i_min $i_max $b_min $b_max
-xh_beamnorm subarray_*_f4.beam f4_norm.beam $t_min $t_max $i_min $i_max $b_min $b_max
+#xh_beamnorm subarray_*_f1.beam f1_norm.beam $t_min $t_max $i_min $i_max $b_min $b_max
+#xh_beamnorm subarray_*_f2.beam f2_norm.beam $t_min $t_max $i_min $i_max $b_min $b_max
+#xh_beamnorm subarray_*_f3.beam f3_norm.beam $t_min $t_max $i_min $i_max $b_min $b_max
+#xh_beamnorm subarray_*_f4.beam f4_norm.beam $t_min $t_max $i_min $i_max $b_min $b_max
+
+xh_beamnorm fuck.beam fuck_norm.beam $t_min $t_max $i_min $i_max $b_min $b_max
+#xh_beamnorm fuck_slow.beam fuck_slow_norm.beam $t_min $t_max $i_min $i_max $b_min $b_max
 

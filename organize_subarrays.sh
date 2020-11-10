@@ -2,7 +2,11 @@
 
 # Organizes subarray xh files from subarray*.txt files
 
-if [ ! -f subarray_1.txt ]; then echo "Must have at least one subarray_?.txt file"; exit; fi
+if [ ! -f subarray_1.txt ]; then 
+     echo "Must have at least one subarray_?.txt file"
+     echo "run subdivide_array.py in this directory first"
+     exit
+fi
 
 j=0
 for i in subarray_*.txt; do

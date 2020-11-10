@@ -13,7 +13,7 @@ echo "#SBATCH --nodes=1" >> P_energy.sbatch
 echo "#SBATCH --ntasks-per-node=1 " >> P_energy.sbatch
 echo "#SBATCH --cpus-per-task=1" >> P_energy.sbatch
 echo "#SBATCH --mem=175000m" >> P_energy.sbatch
-echo "#SBATCH --time=00:30:00 " >> P_energy.sbatch
+echo "#SBATCH --time=01:30:00 " >> P_energy.sbatch
 echo "#SBATCH --output=P_energy.out" >> P_energy.sbatch
 echo "#SBATCH --error=P_energy.err " >> P_energy.sbatch
 

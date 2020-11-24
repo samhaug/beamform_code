@@ -13,12 +13,12 @@ print('read')
 z.interpolate(5)
 z.detrend()
 
-# Make sure every trace has 3250 samples. (650 seconds at 5Hz)
+# Make sure every trace has 6000 samples. (1200 seconds at 5Hz)
 # Trim data to numsamp samples. Pad shorter traces with zeros.
-# Remove extremely short data (less than 600 seconds)
+# Remove extremely short data (less than 5800 samples)
 
-numsamp=3250
-pad_cutoff=3000
+numsamp=6000
+pad_cutoff=5800
 
 for idx,tr in enumerate(z):
    # Don't write a trace with nans

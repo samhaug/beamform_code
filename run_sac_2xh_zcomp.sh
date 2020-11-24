@@ -27,17 +27,17 @@ cat z_comp/*xh > xh/z.xh
 
 # Make sure each trace has 3250 samples
 one=$(xh_shorthead xh/z.xh | wc -l)
-two=$(xh_shorthead xh/z.xh | awk '$NF==3250' | wc -l)
+two=$(xh_shorthead xh/z.xh | awk '$NF==6000' | wc -l)
 
 echo "###########################"
 echo "###########################"
 echo ""
 echo ""
 if (( $one != $two )); then
-   echo "PROBLEM: Not all traces have 3250 samples!"
+   echo "PROBLEM: Not all traces have 6000 samples!"
 
 elif (( $one == $two )); then
-   echo "ALL CLEAR: All traces have 3250 samples!"
+   echo "ALL CLEAR: All traces have 6000 samples!"
 fi
 
 
